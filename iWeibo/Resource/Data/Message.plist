@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<array>
+	<array>
+		<dict>
+			<key>icon</key>
+			<string>messagescenter_at@2x.png</string>
+			<key>name</key>
+			<string>@我的</string>
+			<key>row</key>
+			<string>0</string>
+		</dict>
+		<dict>
+			<key>icon</key>
+			<string>messagescenter_comments@2x.png</string>
+			<key>name</key>
+			<string>评论</string>
+			<key>row</key>
+			<string>1</string>
+		</dict>
+		<dict>
+			<key>icon</key>
+			<string>messagescenter_good@2x.png</string>
+			<key>name</key>
+			<string>赞</string>
+			<key>row</key>
+			<string>2</string>
+		</dict>
+	</array>
+</array>
+</plist>

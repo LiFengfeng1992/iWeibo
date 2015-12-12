@@ -1,0 +1,18 @@
+//
+//  iWeibo-Prefix.pch
+//  iWeibo
+//
+//  Created by dengwei on 15/7/29.
+//  Copyright (c) 2015年 dengwei. All rights reserved.
+//
+
+#ifndef iWeibo_iWeibo_Prefix_pch
+#define iWeibo_iWeibo_Prefix_pch
+
+// Include any system framework and library headers here that should be included in all compilation units.
+// You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
+
+#import "UIView+Frame.h"
+#import "Common.h"
+
+#endif

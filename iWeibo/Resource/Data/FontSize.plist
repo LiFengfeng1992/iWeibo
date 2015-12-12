@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<array>
+	<array>
+		<dict>
+			<key>icon</key>
+			<string>new_friend@2x.png</string>
+			<key>name</key>
+			<string>大</string>
+			<key>row</key>
+			<string>0</string>
+		</dict>
+		<dict>
+			<key>icon</key>
+			<string>followers@2x.png</string>
+			<key>name</key>
+			<string>中</string>
+			<key>row</key>
+			<string>0</string>
+		</dict>
+		<dict>
+			<key>icon</key>
+			<string>level@2x.png</string>
+			<key>name</key>
+			<string>小</string>
+			<key>row</key>
+			<string>0</string>
+		</dict>
+	</array>
+</array>
+</plist>
