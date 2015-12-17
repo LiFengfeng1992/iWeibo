@@ -5,6 +5,12 @@ This is weibo software code.<br/>
 
 screenshots
 -----------------------
+<img alt="one" src="https://raw.github.com/charsdavy/iWeibo/master/screenshots/w0.png" width="180">
+&nbsp;&nbsp;
+<img alt="one" src="https://raw.github.com/charsdavy/iWeibo/master/screenshots/w0.2.png" width="180">
+&nbsp;&nbsp;
+<img alt="one" src="https://raw.github.com/charsdavy/iWeibo/master/screenshots/w0.3.png" width="180">
+&nbsp;&nbsp;
 <img alt="one" src="https://raw.github.com/charsdavy/iWeibo/master/screenshots/w1.png" width="180">
 &nbsp;&nbsp;
 <img alt="one" src="https://raw.github.com/charsdavy/iWeibo/master/screenshots/w1.1.png" width="180">
