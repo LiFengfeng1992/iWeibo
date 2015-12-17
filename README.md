@@ -7,6 +7,10 @@ screenshots
 -----------------------
 <img alt="one" src="https://raw.github.com/charsdavy/iWeibo/master/screenshots/w1.png" width="180">
 &nbsp;&nbsp;
+<img alt="one" src="https://raw.github.com/charsdavy/iWeibo/master/screenshots/w1.1.png" width="180">
+&nbsp;&nbsp;
+<img alt="one" src="https://raw.github.com/charsdavy/iWeibo/master/screenshots/w1.2.png" width="180">
+&nbsp;&nbsp;
 <img alt="one" src="https://raw.github.com/charsdavy/iWeibo/master/screenshots/w2.png" width="180">
 &nbsp;&nbsp;
 <img alt="one" src="https://raw.github.com/charsdavy/iWeibo/master/screenshots/w3.png" width="180">

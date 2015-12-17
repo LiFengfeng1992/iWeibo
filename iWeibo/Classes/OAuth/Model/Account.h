@@ -20,6 +20,9 @@
  */
 @property (nonatomic, copy)NSString *uid;
 
-
+/**
+ *  用户昵称
+ */
+@property (nonatomic, copy)NSString *nickName;
 
 @end

@@ -24,13 +24,19 @@
 #import "CommentController.h"
 #import "StatusCacheTool.h"
 #import "SettingTool.h"
+#import "TitleButton.h"
+#import "PopView.h"
+#import "PopController.h"
 
-@interface HomeController ()<StatusOptionDockDelegate, MJRefreshBaseViewDelegate>
+@interface HomeController ()<StatusOptionDockDelegate, PopViewDelegate, MJRefreshBaseViewDelegate>
 {
     NSMutableArray *_statusFrames;
     long long statusId;
     MJRefreshHeaderView *_header;
 }
+@property (nonatomic, strong) PopView *popView;
+@property (nonatomic, strong) PopController *popController;
+@property (nonatomic, weak) TitleButton *titleButton;
 
 @end
 
@@ -38,6 +44,27 @@
 
 #pragma mark 重写这个方法的目的，去掉父类默认的操作：显示滚动条
 kHideScroll
+
+#pragma mark 懒加载
+- (PopController *)popVc
+{
+    if (_popController == nil) {
+        PopController *pop = [[PopController alloc] init];
+        _popController = pop;
+        
+    }
+    return _popController;
+}
+- (PopView *)popView
+{
+    if (_popView == nil) {
+        
+        PopView *v = [PopView popView];
+        v.delegate = self;
+        _popView = v;
+    }
+    return _popView;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -338,30 +365,37 @@ kHideScroll
 
 #pragma mark 设置界面属性
 -(void)buildUI
-{
+{    
+    //1.导航中间标题
+    // 设置titleView
+    TitleButton *titleButton = [TitleButton buttonWithType:UIButtonTypeCustom];
+    [titleButton addTarget:self action:@selector(titleClick:) forControlEvents:UIControlEventTouchUpInside];
+    _titleButton = titleButton;
+    self.navigationItem.titleView = titleButton;
     
-    //1.设置标题
     NSString *uid = [AccountTool shareAccountTool].currentAccount.uid;
-
-    [UserTool userInfoWithUid:[uid longLongValue] success:^(NSString *screenName) {
-        self.title = screenName;
-    } failure:^(NSError *error) {
-        XLog(@"%@", error);
-    }];
-
+    NSString *nickName = [AccountTool shareAccountTool].currentAccount.nickName;
+    
+    if (nickName == nil) {
+        [UserTool userInfoWithUid:[uid longLongValue] success:^(NSString *screenName) {
+            Account *account = [AccountTool shareAccountTool].currentAccount;
+            account.nickName = screenName;
+            [[AccountTool shareAccountTool] saveAccount:account];
+            // 设置标题按钮
+            [titleButton setTitle:screenName forState:UIControlStateNormal];
+        } failure:^(NSError *error) {
+            XLog(@"%@", error);
+        }];
+    }else{
+        // 设置标题按钮
+        [titleButton setTitle:nickName forState:UIControlStateNormal];
+    }
     
     //2.左边的Item
-    //    UIButton *leftButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    //    UIImage *leftImage = [UIImage imageNamed:@"navigationbar_compose.png"];
-    //    [leftButton setBackgroundImage:leftImage forState:UIControlStateNormal];
-    //    [leftButton setBackgroundImage:[UIImage imageNamed:@"navigationbar_compose_highlighted.png"] forState:UIControlStateHighlighted];
-    //    leftButton.bounds = (CGRect){CGPointZero, leftImage.size};
-    //    [leftButton addTarget:self action:@selector(sendStatus) forControlEvents:UIControlEventTouchUpInside];
-    //    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithCustomView:leftButton];
     self.navigationItem.leftBarButtonItem = [UIBarButtonItem itemWithIcon:@"navigationbar_friendsearch@2x.png" highlightedIcon:@"navigationbar_friendsearch_highlighted@2x.png" target:self action:@selector(searchFriends)];
     
     //3.右边的Item
-    self.navigationItem.rightBarButtonItem = [UIBarButtonItem itemWithIcon:@"navigationbar_pop.png" highlightedIcon:@"navigationbar_pop_highlighted.png" target:self action:@selector(popMenu)];
+    self.navigationItem.rightBarButtonItem = [UIBarButtonItem itemWithIcon:@"navigationbar_pop.png" highlightedIcon:@"navigationbar_pop_highlighted.png" target:self action:@selector(scanMenu)];
     
     // 4.背景颜色
     self.view.backgroundColor = kGlobalBackgroundColor;
@@ -377,7 +411,24 @@ kHideScroll
 
 -(void)titleClick:(UIButton *)button
 {
+    button.selected = !button.selected;
     
+    //  显示菜单
+    CGFloat x = (self.view.width - 200) * 0.5;
+    CGFloat y = CGRectGetMaxY(self.navigationController.navigationBar.frame) - 9;
+    
+    self.popView.contentView = self.popVc.view;
+    
+    [self.popView showInRect:CGRectMake(x, y, 200, 200)];
+    
+    XLog(@"标题弹出");
+}
+
+#pragma mark popView代理
+- (void)popViewDidDismiss:(PopView *)popView
+{
+    _titleButton.selected = NO;
+    _popView = nil;
 }
 
 #pragma mark 查找好友
@@ -386,10 +437,10 @@ kHideScroll
     XLog(@"查找好友");
 }
 
-#pragma mark 弹出菜单
--(void)popMenu
+#pragma mark 扫描
+-(void)scanMenu
 {
-    XLog(@"弹出菜单");
+    XLog(@"扫描");
 }
 
 // 刷新数据：重新访问数据源，重新给数据源和代理发送所有需要的消息（重新调用数据源和代理所有需要的方法）

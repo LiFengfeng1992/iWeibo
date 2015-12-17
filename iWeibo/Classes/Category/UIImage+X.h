@@ -21,4 +21,6 @@
 
 + (instancetype)imageWithStretchableName:(NSString *)imageName;
 
++ (instancetype)resizableWithImageName:(NSString *)imageName;
+
 @end

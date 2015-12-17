@@ -15,7 +15,7 @@
 {
     [encoder encodeObject:_accessToken forKey:@"accessToken"];
     [encoder encodeObject:_uid forKey:@"uid"];
-
+    [encoder encodeObject:_nickName forKey:@"nickName"];
 }
 
 -(id)initWithCoder:(NSCoder *)decoder
@@ -23,7 +23,7 @@
     if (self = [super init]) {
         self.accessToken = [decoder decodeObjectForKey:@"accessToken"];
         self.uid = [decoder decodeObjectForKey:@"uid"];
-
+        self.nickName = [decoder decodeObjectForKey:@"nickName"];
     }
     
     return self;
