@@ -1,7 +1,7 @@
 # iWeibo
 This is weibo software code.<br/>
-功能包括：浏览微博，转发微博，评论微博，查看微博详情，下拉刷新，上拉加载，声音开关，数据离线缓存，账号退出。<br/>
-所有图片来源新浪微博，仅用作学习交流，如有侵权烦请告知，将立即撤销。
+功能包括：</br>浏览微博;</br>转发微博;</br>评论微博;</br>查看微博详情;</br>下拉刷新;</br>上拉加载;</br>声音开关;</br>数据离线缓存;</br>扫描二维码;</br>账号退出。<br/>
+所有图片来源新浪微博，仅用作学习交流。
 
 screenshots
 -----------------------
@@ -16,6 +16,8 @@ screenshots
 <img alt="one" src="https://raw.github.com/charsdavy/iWeibo/master/screenshots/w1.1.png" width="180">
 &nbsp;&nbsp;
 <img alt="one" src="https://raw.github.com/charsdavy/iWeibo/master/screenshots/w1.2.png" width="180">
+&nbsp;&nbsp;
+<img alt="one" src="https://raw.github.com/charsdavy/iWeibo/master/screenshots/w1.3.png" width="180">
 &nbsp;&nbsp;
 <img alt="one" src="https://raw.github.com/charsdavy/iWeibo/master/screenshots/w2.png" width="180">
 &nbsp;&nbsp;
