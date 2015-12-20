@@ -27,6 +27,7 @@
 #import "TitleButton.h"
 #import "PopView.h"
 #import "PopController.h"
+#import "ScanController.h"
 
 @interface HomeController ()<StatusOptionDockDelegate, PopViewDelegate, MJRefreshBaseViewDelegate>
 {
@@ -46,7 +47,7 @@
 kHideScroll
 
 #pragma mark 懒加载
-- (PopController *)popVc
+- (PopController *)popController
 {
     if (_popController == nil) {
         PopController *pop = [[PopController alloc] init];
@@ -417,8 +418,7 @@ kHideScroll
     CGFloat x = (self.view.width - 200) * 0.5;
     CGFloat y = CGRectGetMaxY(self.navigationController.navigationBar.frame) - 9;
     
-    self.popView.contentView = self.popVc.view;
-    
+    self.popView.contentView = self.popController.view;
     [self.popView showInRect:CGRectMake(x, y, 200, 200)];
     
     XLog(@"标题弹出");
@@ -437,10 +437,12 @@ kHideScroll
     XLog(@"查找好友");
 }
 
-#pragma mark 扫描
+#pragma mark 扫描二维码
 -(void)scanMenu
 {
-    XLog(@"扫描");
+    XLog(@"扫描二维码");
+    ScanController *scanController = [[ScanController alloc] init];
+    [self.navigationController pushViewController:scanController animated:YES];
 }
 
 // 刷新数据：重新访问数据源，重新给数据源和代理发送所有需要的消息（重新调用数据源和代理所有需要的方法）

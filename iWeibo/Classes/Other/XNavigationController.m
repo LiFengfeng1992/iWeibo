@@ -18,18 +18,13 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    
-    
     //清空滑动返回手势的代理，就能实现滑动功能
     _popDelegate = self.interactivePopGestureRecognizer.delegate;
     XLog(@"pop delegate %@", _popDelegate);
     self.interactivePopGestureRecognizer.delegate = nil;
     
-    
     //返回根控制器时，需要将手势代理交回给根控制器
     self.delegate = self;
-    
-    
 }
 
 #pragma mark 第一次使用这个类的时候调用
@@ -75,7 +70,6 @@
         self.interactivePopGestureRecognizer.delegate = nil;
     }
 }
-
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
