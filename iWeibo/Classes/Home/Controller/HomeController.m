@@ -420,8 +420,6 @@ kHideScroll
     
     self.popView.contentView = self.popController.view;
     [self.popView showInRect:CGRectMake(x, y, 200, 200)];
-    
-    XLog(@"标题弹出");
 }
 
 #pragma mark popView代理

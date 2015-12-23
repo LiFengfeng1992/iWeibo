@@ -15,13 +15,13 @@
 
 #import "ScanController.h"
 #import <AVFoundation/AVFoundation.h>
+#import "ResultScanController.h"
 
 @interface ScanController ()<AVCaptureMetadataOutputObjectsDelegate>
 
 @property (nonatomic, strong) UIView *boxView;
 @property (nonatomic, strong) CALayer *scanLayer;
 @property (nonatomic, strong) UIView *viewPreview;
-@property (nonatomic, strong) UILabel *resultLabel;
 
 //捕捉会话
 @property (nonatomic, strong) AVCaptureSession *captureSession;
@@ -62,11 +62,6 @@
     viewPreview.backgroundColor = [UIColor clearColor];
     [self.view addSubview:viewPreview];
     self.viewPreview = viewPreview;
-    UILabel *lblStatus = [[UILabel alloc] init];
-    lblStatus.frame = CGRectMake(20, 460, 320, 20);
-    lblStatus.backgroundColor = [UIColor clearColor];
-    [self.view addSubview:lblStatus];
-    self.resultLabel = lblStatus;
     
     _captureSession = nil;
 }
@@ -151,11 +146,14 @@
         AVMetadataMachineReadableCodeObject *metadataObj = [metadataObjects objectAtIndex:0];
         //判断回传的数据类型
         if ([[metadataObj type] isEqualToString:AVMetadataObjectTypeQRCode]) {
-            [_resultLabel performSelectorOnMainThread:@selector(setText:) withObject:[metadataObj stringValue] waitUntilDone:NO];
-            XLog(@"%@", metadataObj.stringValue);
+            [[NSUserDefaults standardUserDefaults] setObject:metadataObj.stringValue forKey:kScanUrlStr];
             [self performSelectorOnMainThread:@selector(stopReading) withObject:nil waitUntilDone:NO];
         }
     }
+    
+    ResultScanController *resultScan = [[ResultScanController alloc] init];
+    UINavigationController *resultNav = [[UINavigationController alloc] initWithRootViewController:resultScan];
+    [self presentViewController:resultNav animated:YES completion:nil];
 }
 
 - (void)moveScanLayer:(NSTimer *)timer
