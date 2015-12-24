@@ -15,13 +15,13 @@
 
 #import "ScanController.h"
 #import <AVFoundation/AVFoundation.h>
-#import "ResultScanController.h"
 
 @interface ScanController ()<AVCaptureMetadataOutputObjectsDelegate>
 
 @property (nonatomic, strong) UIView *boxView;
 @property (nonatomic, strong) CALayer *scanLayer;
 @property (nonatomic, strong) UIView *viewPreview;
+@property (nonatomic, strong) UIWebView *webView;
 
 //捕捉会话
 @property (nonatomic, strong) AVCaptureSession *captureSession;
@@ -62,6 +62,10 @@
     viewPreview.backgroundColor = [UIColor clearColor];
     [self.view addSubview:viewPreview];
     self.viewPreview = viewPreview;
+    
+    _webView = [[UIWebView alloc] initWithFrame:self.view.bounds];
+    [self.view addSubview:_webView];
+    _webView.hidden = YES;
     
     _captureSession = nil;
 }
@@ -141,19 +145,22 @@
 #pragma mark - AVCaptureMetadataOutputObjectsDelegate
 - (void)captureOutput:(AVCaptureOutput *)captureOutput didOutputMetadataObjects:(NSArray *)metadataObjects fromConnection:(AVCaptureConnection *)connection
 {
+    NSString *urlStr;
     //判断是否有数据
     if (metadataObjects != nil && [metadataObjects count] > 0) {
         AVMetadataMachineReadableCodeObject *metadataObj = [metadataObjects objectAtIndex:0];
         //判断回传的数据类型
         if ([[metadataObj type] isEqualToString:AVMetadataObjectTypeQRCode]) {
-            [[NSUserDefaults standardUserDefaults] setObject:metadataObj.stringValue forKey:kScanUrlStr];
+            urlStr = metadataObj.stringValue;
             [self performSelectorOnMainThread:@selector(stopReading) withObject:nil waitUntilDone:NO];
         }
     }
+
+    _videoPreviewLayer.hidden = YES;
+    _webView.hidden = NO;
+    NSURLRequest *request =[NSURLRequest requestWithURL:[NSURL URLWithString:urlStr]];
+    [self.webView loadRequest:request];
     
-    ResultScanController *resultScan = [[ResultScanController alloc] init];
-    UINavigationController *resultNav = [[UINavigationController alloc] initWithRootViewController:resultScan];
-    [self presentViewController:resultNav animated:YES completion:nil];
 }
 
 - (void)moveScanLayer:(NSTimer *)timer

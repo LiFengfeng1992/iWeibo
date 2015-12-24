@@ -113,7 +113,4 @@ sizeWithAttributes:@{NSFontAttributeName:font}] : CGSizeZero;
 #define kAutoScreen @"autoScreen"
 #define kSoundState @"soundState"
 
-//url str
-#define kScanUrlStr @"scanResultString"
-
 #endif  //iWeibo_Common_h
