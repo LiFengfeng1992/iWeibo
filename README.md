@@ -11,8 +11,7 @@ This is weibo software code.<br/>
 6）OAuth2.0授权。</br>
 7）使用FMDB实现离线缓存。</br>
 
-#screenshots
------------------------
+#Screenshots
 <img alt="one" src="https://raw.github.com/charsdavy/iWeibo/master/screenshots/w0.png" width="180">
 &nbsp;&nbsp;
 <img alt="one" src="https://raw.github.com/charsdavy/iWeibo/master/screenshots/w0.2.png" width="180">
