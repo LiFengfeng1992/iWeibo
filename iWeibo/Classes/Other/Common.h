@@ -112,5 +112,8 @@ sizeWithAttributes:@{NSFontAttributeName:font}] : CGSizeZero;
 #define kQuickMove @"quickMove"
 #define kAutoScreen @"autoScreen"
 #define kSoundState @"soundState"
+#define kPasswordState @"passwordState"
+#define kPasswordTypeState @"passwordTypeState"
+#define kPassword @"password"
 
 #endif  //iWeibo_Common_h

@@ -1,5 +1,5 @@
 //
-//  ScanController.h
+//  DZQRCodeReader.h
 //  iWeibo
 //
 //  Created by dengwei on 15/12/20.
@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ScanController : UIViewController
+@interface DZQRCodeReader : UIViewController
 
 @end

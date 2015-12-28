@@ -13,8 +13,10 @@
 #import "OAuthController.h"
 #import "UIImageView+WebCache.h"
 #import <AVFoundation/AVFoundation.h>
+#import "PAPasscodeViewController.h"
+#import "SettingTool.h"
 
-@interface AppDelegate ()
+@interface AppDelegate ()<PAPasscodeViewControllerDelegate>
 
 @property (nonatomic, strong)AVAudioPlayer *player;
 
@@ -37,24 +39,26 @@
     //从沙盒中取出上次存储的版本号
     NSString *saveVersion = [[NSUserDefaults standardUserDefaults] objectForKey:key];
     
-    if ([version isEqualToString:saveVersion]) {//不是第一次使用该版本
-        //显示状态栏
-        application.statusBarHidden = NO;
-        
-        if ([AccountTool shareAccountTool].currentAccount) {
-            self.window.rootViewController = [[MainController alloc]init];
-        }else{
-            self.window.rootViewController = [[OAuthController alloc]init];
+    if([SettingTool boolForKey:kPasswordState]){ //已经设置“密码锁”
+        self.window.rootViewController = [self verifyPassword];
+    }else{ //没有设置“密码锁”
+        if ([version isEqualToString:saveVersion]) {//不是第一次使用该版本
+            //显示状态栏
+            application.statusBarHidden = NO;
+            
+            if ([AccountTool shareAccountTool].currentAccount) {
+                self.window.rootViewController = [[MainController alloc]init];
+            }else{
+                self.window.rootViewController = [[OAuthController alloc]init];
+            }            
+        }else{//第一次使用该版本
+            //将新版本号写入沙盒
+            [[NSUserDefaults standardUserDefaults] setObject:version forKey:key];
+            [[NSUserDefaults standardUserDefaults] synchronize];
+            
+            //显示版本新特性
+            self.window.rootViewController = [[NewfeatureController alloc]init];
         }
-        
-        
-    }else{//第一次使用该版本
-        //将新版本号写入沙盒
-        [[NSUserDefaults standardUserDefaults] setObject:version forKey:key];
-        [[NSUserDefaults standardUserDefaults] synchronize];
-        
-        //显示版本新特性
-        self.window.rootViewController = [[NewfeatureController alloc]init];
     }
     
     [self.window makeKeyAndVisible];
@@ -64,6 +68,29 @@
     [application registerUserNotificationSettings:settings];
     
     return YES;
+}
+
+#pragma mark 校验密码
+-(PAPasscodeViewController *)verifyPassword
+{
+    PAPasscodeViewController *passcodeViewController = [[PAPasscodeViewController alloc] initForAction:PasscodeActionEnter];
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
+        passcodeViewController.backgroundView = [[UITableView alloc] initWithFrame:[UIScreen mainScreen].bounds style:UITableViewStyleGrouped];
+    }
+    passcodeViewController.delegate = self;
+    passcodeViewController.passcode = [SettingTool objectForKey:kPassword];
+    passcodeViewController.alternativePasscode = @"9999";
+    passcodeViewController.simple = [SettingTool boolForKey:kPasswordTypeState];
+    
+    return passcodeViewController;
+}
+
+#pragma mark PAPasscodeViewControllerDelegate method
+- (void)PAPasscodeViewControllerDidEnterPasscode:(PAPasscodeViewController *)controller {
+    self.window.rootViewController = [[MainController alloc]init];
+}
+- (void)PAPasscodeViewControllerDidEnterAlternativePasscode:(PAPasscodeViewController *)controller {
+    self.window.rootViewController = [[MainController alloc]init];
 }
 
 #pragma mark 接收到内存警告时会调用

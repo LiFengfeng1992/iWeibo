@@ -16,6 +16,7 @@
 #import "AccountTool.h"
 #import "OAuthController.h"
 #import "StatusCacheTool.h"
+#import "SecurityController.h"
 
 @interface SettingsController ()<UIAlertViewDelegate>
 {
@@ -176,6 +177,10 @@ kHideScroll
         //点击"清除缓存"
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil message:@"确定清除缓存吗" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
         [alert show];
+    }else if (indexPath.section == 1 && indexPath.row == 2) {
+        //跳到隐私与安全控制器
+        SecurityController *security = [[SecurityController alloc]initWithStyle:UITableViewStyleGrouped];
+        [self.navigationController pushViewController:security animated:YES];
     }
 }
 

@@ -1,5 +1,5 @@
 //
-//  ScanController.m
+//  DZQRCodeReader.h
 //  iWeibo
 //
 //  Created by dengwei on 15/12/20.
@@ -13,10 +13,10 @@
  3.实例化AVCaptureSession、AVCaptureVideoPreviewLayer
  */
 
-#import "ScanController.h"
+#import "DZQRCodeReader.h"
 #import <AVFoundation/AVFoundation.h>
 
-@interface ScanController ()<AVCaptureMetadataOutputObjectsDelegate>
+@interface DZQRCodeReader ()<AVCaptureMetadataOutputObjectsDelegate>
 
 @property (nonatomic, strong) UIView *boxView;
 @property (nonatomic, strong) CALayer *scanLayer;
@@ -40,7 +40,7 @@
 
 @end
 
-@implementation ScanController
+@implementation DZQRCodeReader
 
 - (void)viewDidLoad
 {

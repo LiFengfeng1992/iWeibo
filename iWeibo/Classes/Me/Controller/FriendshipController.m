@@ -13,8 +13,12 @@
 #import "AccountTool.h"
 #import "UserModel.h"
 #import "HttpTool.h"
+#import "SearchBar.h"
 
 @interface FriendshipController ()
+{
+    SearchBar *_searchBar;
+}
 
 @end
 
@@ -27,7 +31,8 @@ kHideScroll
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.title = @"新的好友";
+    //添加搜索框
+    [self addSearchBar];
     
     //去掉cell分割线
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
@@ -43,6 +48,24 @@ kHideScroll
         [self.tableView reloadData];
     } failure:nil];
     
+}
+
+#pragma mark 添加搜索框
+-(void)addSearchBar
+{
+    // 创建搜索框
+    SearchBar *searchBar = [[SearchBar alloc] initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, 35)];
+    searchBar.placeholder = @"人名、话题";
+    
+    // 设置titleView为搜索框
+    self.navigationItem.titleView = searchBar;
+    _searchBar = searchBar;
+}
+
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
+{
+    [_searchBar resignFirstResponder];
+    [self.view endEditing:YES];
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -86,7 +109,7 @@ kHideScroll
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 80;
+    return 70;
 }
 
 - (void)didReceiveMemoryWarning {

@@ -1,6 +1,6 @@
 # iWeibo
 This is weibo software code.<br/>
-功能包括：</br>浏览微博;转发微博;评论微博;查看微博详情;下拉刷新;上拉加载;声音开关;数据离线缓存;扫描二维码;账号退出。<br/>
+功能包括：</br>浏览微博;转发微博;评论微博;查看微博详情;下拉刷新;上拉加载;声音开关;数据离线缓存;扫描二维码;密码锁;账号退出。<br/>
 所有图片来源新浪微博，仅用作学习交流。</br>
 技术要点：</br>
 1）使用AFNetworking框架进行网络数据访问，解析JSON数据，上传图片。</br>
@@ -18,6 +18,8 @@ This is weibo software code.<br/>
 <img alt="one" src="https://raw.github.com/charsdavy/iWeibo/master/screenshots/w0.2.png" width="180">
 &nbsp;&nbsp;
 <img alt="one" src="https://raw.github.com/charsdavy/iWeibo/master/screenshots/w0.3.png" width="180">
+&nbsp;&nbsp;
+<img alt="one" src="https://raw.github.com/charsdavy/iWeibo/master/screenshots/w0.4.png" width="180">
 &nbsp;&nbsp;
 <img alt="one" src="https://raw.github.com/charsdavy/iWeibo/master/screenshots/w1.png" width="180">
 &nbsp;&nbsp;

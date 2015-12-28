@@ -142,20 +142,12 @@ kHideScroll
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-
-    if (indexPath.section == 0 && indexPath.row == 0) {
-        //跳到我的朋友控制器
-        FriendshipController *friends = [[FriendshipController alloc]initWithStyle:UITableViewStyleGrouped];
-        [self.navigationController pushViewController:friends animated:YES];
-    }
     
-    if (indexPath.section == 0 && indexPath.row == 1) {
+    if (indexPath.section == 0 && indexPath.row == 0) {
         //跳到我的粉丝控制器
         FollowersController *followers = [[FollowersController alloc]initWithStyle:UITableViewStyleGrouped];
         [self.navigationController pushViewController:followers animated:YES];
-    }
-    
-    if (indexPath.section == 4) {
+    }else if (indexPath.section == 4) {
         //跳到更多控制器
         MoreController *more = [[MoreController alloc]initWithStyle:UITableViewStyleGrouped];
         [self.navigationController pushViewController:more animated:YES];

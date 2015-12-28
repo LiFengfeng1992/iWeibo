@@ -27,7 +27,8 @@
 #import "TitleButton.h"
 #import "PopView.h"
 #import "PopController.h"
-#import "ScanController.h"
+#import "DZQRCodeReader.h"
+#import "FriendshipController.h"
 
 @interface HomeController ()<StatusOptionDockDelegate, PopViewDelegate, MJRefreshBaseViewDelegate>
 {
@@ -93,7 +94,9 @@ kHideScroll
     
     BOOL state = [self refreshSoundState];
     [SettingTool setBool:state forKey:kSoundState];
-   
+    //默认打开"简式密码"开关
+    [SettingTool setBool:YES forKey:kPasswordTypeState];
+    
 }
 
 #pragma mark 集成刷新控件
@@ -433,13 +436,16 @@ kHideScroll
 -(void)searchFriends
 {
     XLog(@"查找好友");
+    //跳到我的朋友控制器
+    FriendshipController *friends = [[FriendshipController alloc]initWithStyle:UITableViewStyleGrouped];
+    [self.navigationController pushViewController:friends animated:YES];
 }
 
 #pragma mark 扫描二维码
 -(void)scanMenu
 {
     XLog(@"扫描二维码");
-    ScanController *scanController = [[ScanController alloc] init];
+    DZQRCodeReader *scanController = [[DZQRCodeReader alloc] init];
     [self.navigationController pushViewController:scanController animated:YES];
 }
 

@@ -5,14 +5,6 @@
 	<array>
 		<dict>
 			<key>icon</key>
-			<string>new_friend@2x.png</string>
-			<key>name</key>
-			<string>新的好友</string>
-			<key>row</key>
-			<string>0</string>
-		</dict>
-		<dict>
-			<key>icon</key>
 			<string>followers@2x.png</string>
 			<key>name</key>
 			<string>我的粉丝</string>
