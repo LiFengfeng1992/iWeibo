@@ -14,6 +14,7 @@
 # 使用方式
 1）新浪开放平台注册账号并创建应用（open.weibo.com）</br>
 2）进入“应用信息”页；选择“高级信息”；进入“OAuth2.0 授权设置”；设置“授权回调页”和“取消授权回调页”，两者可以设置一样的地址</br>
+<img alt="one" src="https://raw.github.com/charsdavy/iWeibo/master/screenshots/oauth.png" width="200"></br>
 3）替换项目源代码中kAppKey、kRedirectURI和kAppsecret值即可</br>
 
 #Screenshots
