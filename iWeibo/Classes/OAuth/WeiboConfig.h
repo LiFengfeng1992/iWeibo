@@ -9,9 +9,9 @@
 #ifndef iWeibo_WeiboConfig_h
 #define iWeibo_WeiboConfig_h
 
-#define kAppKey @"21XXXX400X"
+#define kAppKey @"219XXXXX07"
 #define kRedirectURI @"http://www.baidu.com"
-#define kAppsecret @"fc30c37XXXXXX73d0f0b7adXXXXX3359"
+#define kAppsecret @"fc3XXXXX743ec73d0fXXXXX8e915XXX9"
 
 #define kBaseURL @"https://api.weibo.com"
 #define kUploadURL @"https://upload.api.weibo.com"
